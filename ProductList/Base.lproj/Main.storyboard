@@ -28,6 +28,9 @@
                                     <segment title="Price"/>
                                     <segment title="Title"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChange:" destination="BYZ-38-t0r" eventType="valueChanged" id="fP8-gw-lsO"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lV1-8r-vZc">
                                 <rect key="frame" x="16" y="111" width="288" height="437"/>
@@ -140,7 +143,7 @@
                     <connections>
                         <outlet property="segment" destination="f5D-E4-oan" id="Lk7-VH-728"/>
                         <outlet property="tableView" destination="lV1-8r-vZc" id="chM-vL-GW1"/>
-                        <segue destination="VC8-DZ-ugr" kind="show" identifier="ItemDetails" id="hf1-4p-KCc"/>
+                        <segue destination="VC8-DZ-ugr" kind="show" identifier="ItemDetailsVC" id="hf1-4p-KCc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -155,7 +158,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePick" translatesAutoresizingMaskIntoConstraints="NO" id="3eC-oL-aZs">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePick" translatesAutoresizingMaskIntoConstraints="NO" id="3eC-oL-aZs">
                                 <rect key="frame" x="16" y="71" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="psY-sO-UuM"/>
@@ -163,7 +166,10 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-4S-fz8">
-                                <rect key="frame" x="51" y="106" width="30" height="30"/>
+                                <rect key="frame" x="51" y="100" width="30" height="30"/>
+                                <connections>
+                                    <action selector="addImage:" destination="VC8-DZ-ugr" eventType="touchUpInside" id="7Hb-48-4N7"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1wm-Rt-vCx">
                                 <rect key="frame" x="124" y="71" width="180" height="40"/>
@@ -231,7 +237,7 @@
                             <constraint firstItem="Cwa-cR-Gfk" firstAttribute="leading" secondItem="3eC-oL-aZs" secondAttribute="trailing" constant="8" id="BNc-7z-fIv"/>
                             <constraint firstItem="cJv-Up-6CQ" firstAttribute="trailing" secondItem="Cwa-cR-Gfk" secondAttribute="trailing" constant="16" id="Fy8-Gi-ZsA"/>
                             <constraint firstItem="JCq-4S-fz8" firstAttribute="centerX" secondItem="3eC-oL-aZs" secondAttribute="centerX" id="LPj-dh-QpI"/>
-                            <constraint firstItem="JCq-4S-fz8" firstAttribute="centerY" secondItem="3eC-oL-aZs" secondAttribute="centerY" id="Lwu-yE-e2r"/>
+                            <constraint firstItem="JCq-4S-fz8" firstAttribute="centerY" secondItem="3eC-oL-aZs" secondAttribute="centerY" constant="-6" id="Lwu-yE-e2r"/>
                             <constraint firstItem="Ge7-Iw-ME3" firstAttribute="leading" secondItem="cJv-Up-6CQ" secondAttribute="leading" id="QB7-IZ-aw2"/>
                             <constraint firstItem="cJv-Up-6CQ" firstAttribute="trailing" secondItem="Z9E-Tr-ZZx" secondAttribute="trailing" constant="16" id="UOj-wn-dJz"/>
                             <constraint firstItem="Z9E-Tr-ZZx" firstAttribute="leading" secondItem="cJv-Up-6CQ" secondAttribute="leading" constant="16" id="bFX-pc-gRl"/>
@@ -251,10 +257,14 @@
                     <navigationItem key="navigationItem" title="Add/Edit" id="Wce-EO-QcV">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="yfT-Cm-4l6">
                             <color key="tintColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="VC8-DZ-ugr" id="yIY-pd-CIv"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="details" destination="Z9E-Tr-ZZx" id="i0O-vG-RBR"/>
+                        <outlet property="imageThumb" destination="3eC-oL-aZs" id="mDP-hJ-dv6"/>
                         <outlet property="priceField" destination="Cwa-cR-Gfk" id="m7y-fz-XTM"/>
                         <outlet property="storePicker" destination="Ge7-Iw-ME3" id="Ake-xk-Tse"/>
                         <outlet property="titleField" destination="1wm-Rt-vCx" id="T3b-ka-QPV"/>
@@ -262,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wyw-Hu-2ou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-191" y="135"/>
+            <point key="canvasLocation" x="-191.25" y="134.1549295774648"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xod-hG-bbf">
